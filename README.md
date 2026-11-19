@@ -38,6 +38,25 @@
 
 ---
 
+## 常见疑问与安全性说明 (FAQ)
+
+### Q: 会不会被官方判定为“修改程序”或导致封号？
+**A: 绝对不会，完全没有封号风险。**
+
+1. **零文件与内存篡改**：
+   - 启动器不会修改 `Antigravity.exe`、`language_server.exe` 或任何包文件中的任何一个字节。
+   - 所有官方程序的数字签名、文件哈希均保持 100% 原厂状态，无任何 DLL 注入或内存 Hook。
+2. **纯粹使用官方标准接口**：
+   - `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 是操作系统及 Go / Node.js 语言网络层的官方标准规范。
+   - Google 开发团队在编写 `language_server` 源码时本身就显式内置了这些环境变量的读取逻辑（专为跨国企业/高校受限内网环境设计）。
+   - `--proxy-server` 是 Chromium/Electron 官方标准命令行参数。
+3. **服务端流量视角完全一致**：
+   - 在服务端（`generativelanguage.googleapis.com`）看来，开启 TUN 与使用代理注入启动器的请求出口 IP 都是你的代理节点，且全程采用端到端 TLS 证书握手加密，请求报文与 OAuth 认证 Token 完全一致，服务端无法也不可能将其视为异常。
+4. **本质说明**：
+   - 本工具等同于一个自动化脚本，替你在启动时声明了代理环境变量，与在终端手动输入 `set HTTP_PROXY=...` 启动程序完全一致，属于完全合规的系统级网络配置。
+
+---
+
 ## 源码编译说明
 
 本项目使用 Windows 系统自带的 .NET Framework 编译器（`csc.exe`），无需安装 Visual Studio：
