@@ -1,0 +1,12 @@
+# Build outputs
+dist/
+*.zip
+*.exe
+*.obj
+*.pdb
+
+# IDE & OS files
+.vs/
+.vscode/
+Thumbs.db
+[Dd]esktop.ini
